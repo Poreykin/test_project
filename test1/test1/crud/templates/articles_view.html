@@ -1,4 +1,4 @@
-<a href="{% url 'logout' %}"><button style="float: right;">Logout</button></a>
+Hello {{ user.username }}! <a href="{% url 'logout' %}"><button style="float: right;">Logout</button></a>
 {% block content %}
   <h2>Articles</h2>
   {% if not full_list %}

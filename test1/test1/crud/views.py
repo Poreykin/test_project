@@ -1,9 +1,11 @@
 from django.shortcuts import render, render_to_response, get_object_or_404, redirect
 from django.template import RequestContext
+from django.contrib.auth.decorators import login_required
 
 from .models import Article
 from .forms import CreateForm, UpdateForm
 
+@login_required
 def articles_view(request, article_name = None):
     if article_name:
         article = get_object_or_404(Article, name=article_name)
@@ -21,6 +23,7 @@ def articles_view(request, article_name = None):
 
     return render(request, 'articles_view.html', context)
 
+@login_required
 def create_article(request):
     if request.method == "POST":
         form = CreateForm(request.POST)
@@ -29,12 +32,11 @@ def create_article(request):
             article.author = request.user
             article.save()
             return redirect('articles_view')
-        else:
-            return redirect('create_article')
     else:
         form = CreateForm()
         return render(request, 'edit_article.html', {'form': form, 'new': True})
 
+@login_required
 def update_article(request, article_name = None):
     article = get_object_or_404(Article, name=article_name)
 
@@ -45,12 +47,11 @@ def update_article(request, article_name = None):
             article.text = form.cleaned_data['text']
             article.save()
             return redirect('articles_view', article_name=article_name)
-        else:
-            return redirect('update_article', article_name=article_name)
     else:
         form = CreateForm(initial={'name': article.name, 'text': article.text})
         return render(request, 'edit_article.html', {'form': form, 'new': False, 'article': article})
 
+@login_required
 def delete_article(request, article_name = None):
     article = get_object_or_404(Article, name=article_name)
     article.delete()

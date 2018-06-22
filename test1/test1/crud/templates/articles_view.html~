@@ -1,8 +1,8 @@
-<a href="{% url 'logout' %}"><button style="float: right;">Logout</button></a>
+Hello {{ user.username }} <a href="{% url 'logout' %}"><button style="float: right;">Logout</button></a>
 {% block content %}
   <h2>Articles</h2>
   {% if not full_list %}
-    <a href="{% url 'articles_view' %}">All articles</a>
+    <a href="{% url 'articles_view' %}">&#60;All articles</a>
   {% endif %}
   {% for article in articles %}
     <p><b>{{ article.name }}:</b></p>

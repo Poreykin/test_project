@@ -1,4 +1,5 @@
 import os
+from .social_auth import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -25,8 +26,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'test1',
+    'django.contrib.sitemaps',
+    'mailer',
+    'social.apps.django_app.default',
+    'social.apps.django_app.urls',
     'test1.crud',
+    'test1.authentification',
 ]
 
 MIDDLEWARE = [
@@ -83,6 +88,18 @@ USE_L10N = True
 
 USE_TZ = True
 
+
+# Email settings
+AUTH_USER_EMAIL_UNIQUE = False
+
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = 1025
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
+EMAIL_USE_TLS = False
+DEFAULT_FROM_EMAIL = 'messenger@localhost.com'
+
+EMAIL_BACKEND = "mailer.backend.DbBackend"
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
