@@ -1,0 +1,14 @@
+{% block content %}
+  <h2>Articles</h2>
+  {% for article in articles %}
+    <p><b>{{ article.name }}:</b></p>
+    <p>{{ article.preview }}...</p>
+    <a href="{% url 'create_article' %}"><button>Read article</button></span></a><br>
+    {% if user.username == article.user.username %}
+      <a href="{% url 'create_article' %}"><button>Update</button></span></a>
+      <a href="{% url 'create_article' %}"><button>Delete</button></span></a>
+    {% endif %}
+    <br>
+  {% endfor %}
+  <a href="{% url 'create_article' %}"><button>Create new article</button></span></a>
+{% endblock %}

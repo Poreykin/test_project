@@ -1,0 +1,11 @@
+{% block content %}
+    {% if new %}
+        <h1>New article</h1>
+    {% else %}
+        <h1>Update article {{ article.name }}</h1>
+    {% endif %}
+    <form method="POST" class="post-form">{% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="save btn btn-default">Save</button>
+    </form>
+{% endblock %}

@@ -1,0 +1,10 @@
+{% block content %}
+  <h2>Article {{article.name}}</h2>
+  <p>{{ article.text }}</p>
+  <a href="{% url 'articles_view' article_name={{ article.name }}%}"><button>Read article</button></span></a><br>
+  {% if user.username == article.author.username %}
+    <a href="{% url 'create_article' %}"><button>Update</button></span></a>
+    <a href="{% url 'create_article' %}"><button>Delete</button></span></a>
+  {% endif %}
+  <br>
+{% endblock %}

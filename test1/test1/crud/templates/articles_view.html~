@@ -1,0 +1,20 @@
+<a href="{% url 'logout' %}"><button style="float: right;">Logout</button></a>
+{% block content %}
+  <h2>Articles</h2>
+  {% if not full_list %}
+    <a href="{% url 'articles_view' %}">All articles</a>
+  {% endif %}
+  {% for article in articles %}
+    <p><b>{{ article.name }}:</b></p>
+    <p>{{ article.text }}</p>
+    {% if full_list %}
+      <p><a href="{% url 'articles_view' article_name=article.name %}">Read full article...</a></p>
+    {% endif %}
+    {% if user.username == article.author.username %}
+      <a href="{% url 'update_article' article_name=article.name %}"><button>Update</button></a>
+      <a href="{% url 'delete_article' article_name=article.name %}"><button>Delete</button></a><br>
+    {% endif %}
+    <br>
+  {% endfor %}
+  <a href="{% url 'create_article' %}"><button>Create new article</button></a>
+{% endblock %}
