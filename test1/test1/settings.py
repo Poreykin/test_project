@@ -1,5 +1,5 @@
 import os
-from .social_auth import *
+#from .social_auth import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -27,9 +27,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
-    'mailer',
-    'social.apps.django_app.default',
-    'social.apps.django_app.urls',
+    'django_celery_beat',
+    'django_celery_results',
+    #'social.apps.django_app.default',
+    #'social.apps.django_app.urls',
     'test1.crud',
     'test1.authentification',
 ]
@@ -90,16 +91,24 @@ USE_TZ = True
 
 
 # Email settings
-AUTH_USER_EMAIL_UNIQUE = False
+AUTH_USER_EMAIL_UNIQUE = False # for testing purposes
 
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = 1025
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
-EMAIL_USE_TLS = False
-DEFAULT_FROM_EMAIL = 'messenger@localhost.com'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'gliwick@gmail.com'
+EMAIL_HOST_PASSWORD = 'secret2901'
+EMAIL_USE_TLS = True
+DEFAULT_FROM_EMAIL = 'gliwick@gmail.com'
 
-EMAIL_BACKEND = "mailer.backend.DbBackend"
+
+# Celery settings
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = TIME_ZONE
+
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/

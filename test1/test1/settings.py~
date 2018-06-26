@@ -28,7 +28,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sitemaps',
     'mailer',
-    'social',
+    'social.apps.django_app.default',
+    'social.apps.django_app.urls',
     'test1.crud',
     'test1.authentification',
 ]
