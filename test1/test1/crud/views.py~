@@ -4,6 +4,7 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Article
 from .forms import CreateForm, UpdateForm
+from test1.settings import MEDIA_ROOT
 
 @login_required
 def articles_view(request, article_name = None):
@@ -12,7 +13,7 @@ def articles_view(request, article_name = None):
         articles = [{'author': article.author, 'name': article.name, 'text': article.text}]
         full_list = False
     else:
-        articles = [{'author': article.author, 'name': article.name, 'text': article.text[:10] + '...'} for article in Article.objects.filter()]
+        articles = [{'author': article.author, 'name': article.name, 'text': article.text[:10] + '...'} for article in Article.objects.all()]
         full_list = True
 
     context = {
@@ -32,8 +33,6 @@ def create_article(request):
             article.author = request.user
             article.save()
             return redirect('articles_view')
-        else:
-            return redirect('create_article')
     else:
         form = CreateForm()
         return render(request, 'edit_article.html', {'form': form, 'new': True})
@@ -49,8 +48,6 @@ def update_article(request, article_name = None):
             article.text = form.cleaned_data['text']
             article.save()
             return redirect('articles_view', article_name=article_name)
-        else:
-            return redirect('update_article', article_name=article_name)
     else:
         form = CreateForm(initial={'name': article.name, 'text': article.text})
         return render(request, 'edit_article.html', {'form': form, 'new': False, 'article': article})

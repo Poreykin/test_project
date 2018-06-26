@@ -14,7 +14,7 @@ def gallery_view(request, photo_id = None):
         photos = [{'uploader': photo.uploader, 'id': photo.pk, 'url': os.path.join(MEDIA_ROOT, photo.image_file.url)}]
         full_list = False
     else:
-        photos = [{'uploader': photo.uploader, 'id': photo.pk, 'url': MEDIA_ROOT + '/' + photo.image_file.url} for photo in Photo.objects.all()]
+        photos = [{'uploader': photo.uploader, 'id': photo.pk, 'url': photo.image_file.url} for photo in Photo.objects.all()]
         full_list = True
 
     context = {

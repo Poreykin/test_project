@@ -1,6 +1,5 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils import timezone
 
 class Article(models.Model):
     author = models.ForeignKey(User, db_index=True, null=False, blank=False, on_delete=models.CASCADE)

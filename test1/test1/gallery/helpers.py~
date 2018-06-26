@@ -1,0 +1,13 @@
+import os
+from django.utils.deconstruct import deconstructible
+
+@deconstructible
+class UploadToPathAndRename(object):
+
+    def __init__(self, path):
+        self.sub_path = path
+
+    def __call__(self, filename):
+        ext = os.path.splitext(filename)[1]
+        filename = '{}.{}'.format(instance.pk, ext)
+        return os.path.join(self.sub_path, filename)

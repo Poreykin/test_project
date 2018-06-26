@@ -4,7 +4,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -31,8 +30,9 @@ INSTALLED_APPS = [
     'django_celery_results',
     #'social.apps.django_app.default',
     #'social.apps.django_app.urls',
-    'test1.crud',
     'test1.authentification',
+    'test1.crud',
+    'test1.gallery',
 ]
 
 MIDDLEWARE = [
@@ -50,7 +50,7 @@ ROOT_URLCONF = 'test1.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'test1', 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -111,7 +111,8 @@ CELERY_TIMEZONE = TIME_ZONE
 
 
 # Media settings
-MEDIA_ROOT = BASE_DIR + '/media'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'test1', 'media')
+MEDIA_URL = '/media/'
 
 
 # Static files (CSS, JavaScript, Images)

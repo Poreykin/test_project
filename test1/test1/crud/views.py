@@ -12,7 +12,7 @@ def articles_view(request, article_name = None):
         articles = [{'author': article.author, 'name': article.name, 'text': article.text}]
         full_list = False
     else:
-        articles = [{'author': article.author, 'name': article.name, 'text': article.text[:10] + '...'} for article in Article.objects.filter()]
+        articles = [{'author': article.author, 'name': article.name, 'text': article.text[:10] + '...'} for article in Article.objects.all()]
         full_list = True
 
     context = {
