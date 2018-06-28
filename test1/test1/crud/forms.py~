@@ -11,8 +11,8 @@ class CreateForm(forms.ModelForm):
         fields = ('name', 'text',)
 
 class UpdateForm(forms.Form):
-     name = forms.CharField(widget=forms.TextInput(attrs=attrs_dict), label="")
-     text = forms.CharField(widget=forms.Textarea, label="")
+     name = forms.CharField(widget=forms.TextInput(attrs=attrs_dict), label="Name")
+     text = forms.CharField(widget=forms.Textarea, label="Text")
  
      def put_name(self, name):
          name = forms.CharField(widget=forms.TextInput(attrs=attrs_dict), label=name)

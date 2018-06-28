@@ -1,13 +1,9 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-function Welcome(props) {
-  return <b>{props.text}</b>;
-}
-
-const element = <Welcome text="window.article" />;
+const element = <p>Article: {text}</p>;
 
 ReactDOM.render(
-  element,
-  document.getElementById('react')
+   element,
+   document.getElementById('react')
 );

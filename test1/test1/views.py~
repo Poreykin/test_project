@@ -1,20 +1,8 @@
+import os
 from django.shortcuts import render
 from django.views import View
 from .crud.models import Article
 
 def index(request):
-    return render(request, 'index.html')
-
-
-class ArticlesList(View):
-    title = "Articles"
-    template = 'articles.html'
-
-    def get(self, request):
-        article_text = Article.objects.get(name='aa').text
-
-        context = {
-            'article': article_text,
-        }
-
-        return render(request, self.template, context)
+    article = Article.objects.all()[0]
+    return render(request, 'index.html', context={'name': article.name,'text': article.text})

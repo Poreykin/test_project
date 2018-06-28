@@ -1,13 +1,16 @@
 {% load render_bundle from webpack_loader %}
-
 <!DOCTYPE html>
 <html>
  <head>
- <meta charset="UTF-8">
- <title>Example</title>
- </head>
+  <meta charset="UTF-8">
+  <title>Example</title>
+  </head>
  <body>
- <div id="react"></div>
- {% render_bundle 'main' %}
+  <h1>Title: {{ name }}</h1>
+  <div id="react"></div>
+  <script>
+   const text = {{ text|safe }};
+  </script>
+  {% render_bundle 'main' %}
  </body>
 </html>

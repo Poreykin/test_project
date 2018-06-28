@@ -13,7 +13,7 @@ SECRET_KEY = '=7z6r&pz-&qdwba7)8kzh3+lq4sy$vi1g_k1lqq)559vu$up9y'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'test1.authentification',
     'test1.crud',
     'test1.gallery',
+    'test1.payment'
 ]
 
 MIDDLEWARE = [
@@ -133,7 +134,7 @@ WEBPACK_LOADER = {
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-  os.path.join(BASE_DIR, 'react-django/build/static'),
+  os.path.join(BASE_DIR, 'test1/static'),
 ]
 
 LOGIN_REDIRECT_URL = '/articles/view'

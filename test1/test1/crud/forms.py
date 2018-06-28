@@ -1,5 +1,4 @@
 from django import forms
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .models import Article
 
 attrs_dict = {'class': 'required'}
