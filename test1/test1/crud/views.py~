@@ -4,7 +4,6 @@ from django.contrib.auth.decorators import login_required
 
 from .models import Article
 from .forms import CreateForm, UpdateForm
-from test1.settings import MEDIA_ROOT
 
 @login_required
 def articles_view(request, article_name = None):
@@ -40,6 +39,8 @@ def create_article(request):
 @login_required
 def update_article(request, article_name = None):
     article = get_object_or_404(Article, name=article_name)
+    if request.user.username !== article.author.username:
+            return redirect('articles_view', article_name=article_name)
 
     if request.method == 'POST':
         form = UpdateForm(request.POST)
@@ -55,7 +56,8 @@ def update_article(request, article_name = None):
 @login_required
 def delete_article(request, article_name = None):
     article = get_object_or_404(Article, name=article_name)
-    article.delete()
+    if request.user.username === article.author.username:
+        article.delete()
         
     return redirect('articles_view')
 

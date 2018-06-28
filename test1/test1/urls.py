@@ -1,9 +1,13 @@
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from django.conf.urls import url, include
 from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.urls import static
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.views.generic import TemplateView
 from .authentification import views
-from .settings import BASE_DIR
+from .settings import BASE_DIR, MEDIA_ROOT, MEDIA_URL
+from .views import index, ArticlesList
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -13,6 +17,11 @@ urlpatterns = [
     url(r'login/$', auth_views.login, {'template_name': 'login.html'}, name='login'),
     url(r'logout/$', auth_views.logout, {'next_page': '/login/'}, name='logout'),
     #url(r'social/', include('social.apps.django_app.urls', namespace='social')),
-    url(r'articles/', include('test1.crud.urls')),
+    #url(r'articles/', include('test1.crud.urls')),
+    path('articles/', ArticlesList.as_view(), name='articles'),
     url(r'gallery/', include('test1.gallery.urls')),
+    url(r'^react', index, name='index'),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
+urlpatterns += static(MEDIA_URL, document_root=MEDIA_ROOT)

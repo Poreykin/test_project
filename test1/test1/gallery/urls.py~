@@ -3,7 +3,6 @@ from . import views
 
 urlpatterns = [
     url(r'view/$', views.gallery_view, name='gallery_view'),
-    #url(r'view/(?P<article_name>.*)', views.photos_view, name='photos_view'),
     url(r'upload', views.upload_photo, name='upload_photo'),
-    #url(r'delete/(?P<photo_id>.*)', views.delete_photo, name='delete_photo'),
+    url(r'delete/(?P<photo_id>.*)', views.delete_photo, name='delete_photo'),
 ]

@@ -1,19 +1,10 @@
 Hello {{ user.username }}! <a href="{% url 'logout' %}"><button style="float: right;">Logout</button></a>
 {% block content %}
   <h2>Gallery</h2>
-  {% if not full_list %}
-    <a href="{% url 'photos_view' %}">&#60;All photos</a>
-  {% endif %}
   {% for photo in photos %}
-    <p><b>{{ photo.url }}</b></p>
-    <img src="{{ photo.url }}">
-    {% if full_list %}
-      <p><a href="{% url 'gallery_view' photo_id=photo.id %}">Show full image...</a></p>
-    {% endif %}
-    {% if user.username == photo_uploader.username %}
-      <a href="{% url 'gallery_view' photo_id=photo.id %}"><button>Delete</button></a><br>
-    {% endif %}
-    <br>
+    <img src="{{ photo.thumbnail.url }}" style="margin: 20px 20px">
+    <img src="{{ photo.thumbnail2.url }}" style="margin: 20px 20px">
+    <img src="{{ photo.thumbnail3.url }}" style="margin: 20px 20px">
   {% endfor %}
-  <a href="{% url 'upload_photo' %}"><button>Upload new photo</button></a>
+  <br><a href="{% url 'upload_photo' %}"><button>Upload new photo</button></a>
 {% endblock %}

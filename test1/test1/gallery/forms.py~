@@ -10,8 +10,6 @@ class UploadForm(forms.ModelForm):
         model = Photo
         fields = ('image_file',)
 
-    name = forms.CharField(widget=forms.TextInput(attrs=attrs_dict), label="Filename", required=False)
-
 """class UpdateForm(forms.Form):
      name = forms.CharField(widget=forms.TextInput(attrs=attrs_dict), label="")
      text = forms.CharField(widget=forms.Textarea, label="")

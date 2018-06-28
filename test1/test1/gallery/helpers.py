@@ -2,7 +2,7 @@ import os
 from django.utils.deconstruct import deconstructible
 
 @deconstructible
-class UploadTo(object):
+class UploadToIdNameDir(object):
     def __init__(self, path, sub_dir):
         self.sub_path = path
         self.sub_dir = sub_dir

@@ -28,6 +28,9 @@ INSTALLED_APPS = [
     'django.contrib.sitemaps',
     'django_celery_beat',
     'django_celery_results',
+    'stdimage',
+    'imagekit',
+    'webpack_loader',
     #'social.apps.django_app.default',
     #'social.apps.django_app.urls',
     'test1.authentification',
@@ -112,12 +115,25 @@ CELERY_TIMEZONE = TIME_ZONE
 
 # Media settings
 MEDIA_ROOT = os.path.join(BASE_DIR, 'test1', 'media')
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
+
+
+# Webpacker settings
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.json'),
+    }
+}
 
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.0/howto/static-files/
 
 STATIC_URL = '/static/'
+
+STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, 'test1/static'),
+]
 
 LOGIN_REDIRECT_URL = '/articles/view'
