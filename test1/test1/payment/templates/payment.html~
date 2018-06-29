@@ -1,8 +1,0 @@
-{% block content %}
-    <h1>Pay</h1>
-    <p></p>
-    <form enctype="multipart/form-data" method="POST" class="post-form">{% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit" class="save btn btn-default">Confirm</button>
-    </form>
-{% endblock %}

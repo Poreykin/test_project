@@ -1,8 +1,0 @@
-Hello {{ user.username }}! <a href="{% url 'logout' %}"><button style="float: right;">Logout</button></a>
-{% block content %}
-  <h2>Gallery</h2>
-  {% for photo in photos %}
-    <img src="{{ photo.thumbnail.url }}" style="margin: 20px 20px">
-  {% endfor %}
-  <br><a href="{% url 'upload_photo' %}"><button>Upload new photo</button></a>
-{% endblock %}

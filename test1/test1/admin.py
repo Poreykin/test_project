@@ -1,4 +1,5 @@
 from django.contrib import admin
-from test1.crud.models import Article
+from mptt.admin import MPTTModelAdmin
+from myproject.myapp.models import Node
 
-admin.site.register(Article)
+admin.site.register(Node, MPTTModelAdmin)

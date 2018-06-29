@@ -24,25 +24,12 @@ class ImageField(StdImageField):
 class Photo(models.Model):
     uploader = models.ForeignKey(User, db_index=True, null=False, blank=False, on_delete=models.CASCADE)
 
-    """image_file = ImageField(upload_to='stdimage', blank=True, variations={
+    image_file = ImageField(upload_to=UploadToIdNameDir('photo'), blank=True, variations={
         '1': (600, 400),
         '2': (300, 200),
         '3': (100, 100, True),
-    })"""
-    image_file = models.ImageField(upload_to=UploadToIdNameDir('photo', '0'))
-    image_thumbnail = ProcessedImageField(upload_to=UploadToIdNameDir('admin', 'avatar/1'),
-                                           processors=[ResizeToFill(600, 400)],
-                                           format='JPEG',
-                                           options={'quality': 60})
-    image_thumbnail2 = ProcessedImageField(upload_to=UploadToIdNameDir('admin', 'avatar/2'),
-                                           processors=[ResizeToFill(300, 200)],
-                                           format='JPEG',
-                                           options={'quality': 60})
-    image_thumbnail3 = ProcessedImageField(upload_to=UploadToIdNameDir('admin', 'avatar/3'),
-                                           processors=[ResizeToFill(100, 50)],
-                                           format='JPEG',
-                                           options={'quality': 60})
+    })
 
-    
+
     added_time = models.DateTimeField(auto_now_add=True)
     update_time = models.DateTimeField(auto_now=True)

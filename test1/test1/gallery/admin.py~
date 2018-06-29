@@ -1,5 +1,0 @@
-from test1.crud.models import Article
-from test1.gallery.models import Photo
-
-admin.site.register(Article)
-admin.site.register(Photo)

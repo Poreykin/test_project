@@ -19,6 +19,7 @@ urlpatterns = [
     url(r'articles/', include('test1.crud.urls')),
     url(r'gallery/', include('test1.gallery.urls')),
     url(r'pay/', include('test1.payment.urls')),
+    url(r'courses/', include('test1.courses.urls')),
     path('react/', react_test, name='react_test'),
     #url(r'social/', include('social.apps.django_app.urls', namespace='social')),
 ]

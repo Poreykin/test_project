@@ -31,12 +31,16 @@ INSTALLED_APPS = [
     'stdimage',
     'imagekit',
     'webpack_loader',
+    'cloudpayments',
+    'mptt',
+    'rest_framework',
     #'social.apps.django_app.default',
     #'social.apps.django_app.urls',
     'test1.authentification',
     'test1.crud',
     'test1.gallery',
     'test1.payment',
+    'test1.courses',
 ]
 
 MIDDLEWARE = [

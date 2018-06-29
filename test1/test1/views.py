@@ -1,6 +1,5 @@
 import os
 from django.shortcuts import render
-from django.views import View
 from .crud.models import Article
 
 def react_test(request):

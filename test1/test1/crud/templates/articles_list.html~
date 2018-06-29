@@ -1,8 +1,0 @@
-{% block content %}
-  <h2>Articles</h2>
-  {% for article in articles %}
-    <p><b>{{ article.name }}</b></p>
-    <p>{% article.text[:20] %} {{% if article.text.length > 20 %}} '...' {{ endif }}</p>
-    <br>
-  {% endfor %}
-{% endblock %}
