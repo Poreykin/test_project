@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     'cloudpayments',
     'mptt',
     'rest_framework',
+    'django_fsm',
     #'social.apps.django_app.default',
     #'social.apps.django_app.urls',
     'test1.authentification',

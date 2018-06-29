@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
-from rest_framework import generics
-from rest_framework.response import Response
-from .models import Course
-from .forms import MoveCourseForm
+from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
+from django_fsm import can_proceed
+from .models import Course, Task, TaskStatus
+from .forms import MoveCourseForm, CreateTaskForm
 
+@login_required
 def courses_view(request):
     if request.method == "POST":
         form = MoveCourseForm(request.POST)
@@ -22,3 +23,45 @@ def courses_view(request):
     courses = Course.objects.all()
     form = MoveCourseForm()
     return render(request, "courses.html", {'courses': courses, 'form': form})
+
+@login_required
+def create_task(request):
+    if request.method == "POST":
+        form = CreateTaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.save()
+            task_status = TaskStatus.objects.create(student=request.user, task=task)
+            return redirect('task_view', task_status_id=task_status.pk)
+    else:
+        form = CreateTaskForm()
+        return render(request, 'create_task.html', {'form': form, 'new': True})
+
+@login_required
+def task_view(request, task_status_id=None):
+    task_status = get_object_or_404(TaskStatus, pk=task_status_id)
+    task = task_status.task
+    can_be_sent = can_proceed(task_status.send)
+    is_reviewed = (task_status.state == 'RVW')
+    return render(request, "task.html", {'task': task, 'task_status': task_status, 'can_be_sent': can_be_sent, 'is_reviewed': is_reviewed, 'user': request.user})
+
+@login_required
+def send_task(request, task_status_id=None):
+    task_status = get_object_or_404(TaskStatus, pk=task_status_id)
+    task_status.send()
+    task_status.save()
+    return redirect('task_view', task_status_id=task_status_id)
+
+@login_required
+def send_task_back(request, task_status_id=None):
+    task_status = get_object_or_404(TaskStatus, pk=task_status_id)
+    task_status.send_back()
+    task_status.save()
+    return redirect('task_view', task_status_id=task_status_id)
+
+@login_required
+def accept_task(request, task_status_id=None):
+    task_status = get_object_or_404(TaskStatus, pk=task_status_id)
+    task_status.accept()
+    task_status.save()
+    return redirect('task_view', task_status_id=task_status_id)

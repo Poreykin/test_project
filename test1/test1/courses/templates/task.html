@@ -1,0 +1,11 @@
+{% block content %}
+  <h2>Task</h2>
+  <p><b>{{ task.solution }}</b></p>
+  {% if can_be_sent and user.pk == task_status.student.pk %}
+    <a href="{% url 'send_task' task_status_id=task_status.pk %}"><button>Send</button></a>
+  {% endif %}
+  {% if is_reviewed %}
+    <a href="{% url 'send_task_back' task_status_id=task_status.pk %}"><button>Send back</button></a>
+    <a href="{% url 'accept_task' task_status_id=task_status.pk %}"><button>Accept</button></a>
+  {% endif %}
+{% endblock %}

@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course
+from .models import Course, Task
 
 attrs_dict = {'class': 'required'}
 
@@ -10,3 +10,9 @@ class MoveCourseForm(forms.Form):
     id = forms.ChoiceField(choices=courses_ids, label="id")
     left = forms.ChoiceField(choices=[('NONE', 'To the left')]+courses_names, label="left")
     right = forms.ChoiceField(choices=courses_names+[('NONE', 'To the right')], label="right")
+
+class CreateTaskForm(forms.ModelForm):
+
+    class Meta:
+        model = Task
+        fields = ('solution',)
