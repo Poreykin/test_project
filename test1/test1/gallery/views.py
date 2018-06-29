@@ -9,7 +9,7 @@ from test1.settings import MEDIA_ROOT
 
 @login_required
 def gallery_view(request):
-    photos = [{'uploader': photo.uploader, 'id': photo.pk, 'thumbnail': photo.image_thumbnail, 'thumbnail2': photo.image_thumbnail2, 'thumbnail3': photo.image_thumbnail3} for photo in Photo.objects.all()]
+    photos = [{'uploader': photo.uploader, 'id': photo.pk, 'image': photo.image_file} for photo in Photo.objects.all()]
     full_list = True
 
     context = {
@@ -40,6 +40,6 @@ def upload_photo(request):
 def delete_photo(request, photo_id = None):
     photo = get_object_or_404(Photo, pk=photo_id)
     if request.user.username == photo.uploader.username:
-        photo.delete()        
+        photo.delete()
 
     return redirect('gallery_view')
