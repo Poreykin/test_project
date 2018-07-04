@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'django_fsm',
     'paypalrestsdk',
+    'service_objects',
     #'social.apps.django_app.default',
     #'social.apps.django_app.urls',
     'test1.authentification',
@@ -118,6 +119,11 @@ CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = TIME_ZONE
+
+
+# PayPal settings
+PAYPAL_CLIENT_ID = "AYC0aWHLKVnQkuFMdnPZfIz5J2VR4lTmM9ghU_szP9QT95xkWo0NQZNZ6Rme11MSw9P9SCejMfhSlakU"
+PAYPAL_CLIENT_SECRET = "EAu4fR7ccEdPU8Np-5ljZOaEyReXM-nC5Aetwdz_uiGef6ZeUc11plBjAso3BeNAj_Tc_0WnfCn8m2e9"
 
 
 # Media settings
