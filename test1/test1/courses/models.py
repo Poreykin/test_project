@@ -26,6 +26,9 @@ class TaskStatus(models.Model):
     task = models.ForeignKey(Task, unique=True, db_index=False, null=False, blank=False, on_delete=models.CASCADE)
     state = FSMField(default=STATE.PROCESS, choices=CHOICES, protected=True)
 
+    comment = models.TextField(db_index=False, null=True, blank=True)
+    response = models.TextField(db_index=False, null=True, blank=True)
+
     @transition(field=state, source=[STATE.PROCESS, STATE.DEBT], target=STATE.REVIEW, permission=lambda instance, user: user.pk == instance.student.pk)
     def send(self):
         pass

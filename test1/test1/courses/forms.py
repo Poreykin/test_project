@@ -1,5 +1,5 @@
 from django import forms
-from .models import Course, Task
+from .models import Course, Task, TaskStatus
 
 attrs_dict = {'class': 'required'}
 
@@ -16,3 +16,9 @@ class CreateTaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ('solution',)
+
+class SendTaskBackForm(forms.ModelForm):
+
+    class Meta:
+        model = TaskStatus
+        fields = ('comment', 'response',)

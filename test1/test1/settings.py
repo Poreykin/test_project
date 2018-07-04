@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'mptt',
     'rest_framework',
     'django_fsm',
+    'paypalrestsdk',
     #'social.apps.django_app.default',
     #'social.apps.django_app.urls',
     'test1.authentification',

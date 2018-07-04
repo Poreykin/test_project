@@ -2,9 +2,10 @@ Hello {{ user.username }}! <a href="{% url 'logout' %}"><button style="float: ri
 {% block content %}
   <h2>Gallery</h2>
   {% for photo in photos %}
-    <img src="{{ photo.image.1.url }}" style="margin: 20px 20px">
-    <img src="{{ photo.image.2.url }}" style="margin: 20px 20px">
-    <img src="{{ photo.image.3.url }}" style="margin: 20px 20px">
+    <img src="{{ photo.image.url }}" style="margin: 20px 20px">
+    <img src="{{ photo.image.large.url }}" style="margin: 20px 20px">
+    <img src="{{ photo.image.medium.url }}" style="margin: 20px 20px">
+    <img src="{{ photo.image.small.url }}" style="margin: 20px 20px">
   {% endfor %}
   <br><a href="{% url 'upload_photo' %}"><button>Upload new photo</button></a>
 {% endblock %}

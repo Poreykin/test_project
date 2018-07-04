@@ -1,8 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
-from django_fsm import can_proceed
+from django_fsm import can_proceed, has_transition_perm
 from .models import Course, Task, TaskStatus
-from .forms import MoveCourseForm, CreateTaskForm
+from .forms import MoveCourseForm, CreateTaskForm, SendTaskBackForm
 
 @login_required
 def courses_view(request):
@@ -40,10 +40,21 @@ def create_task(request):
 @login_required
 def task_view(request, task_status_id=None):
     task_status = get_object_or_404(TaskStatus, pk=task_status_id)
+    if request.method == 'POST':
+        form = SendTaskBackForm(request.POST)
+        if form.is_valid():
+            task_status.comment = form.cleaned_data['comment']
+            task_status.response = form.cleaned_data['response']
+            task_status.save()
+            return redirect('send_task_back', task_status_id=task_status_id)
     task = task_status.task
-    can_be_sent = can_proceed(task_status.send)
-    is_reviewed = (task_status.state == 'RVW')
-    return render(request, "task.html", {'task': task, 'task_status': task_status, 'can_be_sent': can_be_sent, 'is_reviewed': is_reviewed, 'user': request.user})
+    can_be_sent = (can_proceed(task_status.send) and has_transition_perm(task_status.send, request.user))
+    review_mode = (task_status.state == 'RVW' and request.user.is_superuser)
+    context = {'task': task, 'task_status': task_status, 'can_be_sent': can_be_sent, 'review_mode': review_mode, 'user': request.user}
+    if review_mode:
+        form = SendTaskBackForm()
+        context['form'] = form
+    return render(request, "task.html", context)
 
 @login_required
 def send_task(request, task_status_id=None):

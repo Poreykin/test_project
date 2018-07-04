@@ -1,11 +1,16 @@
 {% block content %}
   <h2>Task</h2>
-  <p><b>{{ task.solution }}</b></p>
-  {% if can_be_sent and user.pk == task_status.student.pk %}
+  <p><b>Solution:</b> {{ task.solution }}</p>
+  {% if can_be_sent %}
+    <p><b>Response:</b> {{ task_status.response }}</p>
     <a href="{% url 'send_task' task_status_id=task_status.pk %}"><button>Send</button></a>
   {% endif %}
-  {% if is_reviewed %}
-    <a href="{% url 'send_task_back' task_status_id=task_status.pk %}"><button>Send back</button></a>
+  {% if review_mode %}
+    <p><b>Comment:</b> {{ task_status.comment }}</p>
+    <form method="POST" class="post-form">{% csrf_token %}
+      {{ form.as_p }}
+      <button type="submit" class="save btn btn-default">Send back</button>
+    </form>
     <a href="{% url 'accept_task' task_status_id=task_status.pk %}"><button>Accept</button></a>
   {% endif %}
 {% endblock %}
